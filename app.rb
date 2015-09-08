@@ -32,7 +32,14 @@ def authenticate!
 end
 
 get '/' do
+  @title = 'Meet ups in Space'
+  @meet_ups = Meetup.all
   erb :index
+end
+
+get '/:id' do
+
+  erb :show
 end
 
 get '/auth/github/callback' do

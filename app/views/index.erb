@@ -1,1 +1,16 @@
 <h1><%= @title %></h1>
+
+<table style="width:100%">
+  <tr>
+    <td>Title</td>
+    <td>description</td>
+    <td>Place</td>
+  </tr>
+  <tr>
+    <%@meet_ups.each do |meet_up|%>
+    <td><%=meet_up.title%></td>
+    <td><%=meet_up.description%></td>
+    <td><%=meet_up.location%></td>
+  </tr>
+  <%end%>
+</table>

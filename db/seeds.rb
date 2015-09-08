@@ -4,3 +4,9 @@
 # Example:
 #
 #   Person.create(first_name: 'Eric', last_name: 'Kelly')
+meet_ups= [{ title: 'Lunar Golfing', description: 'Super fan activity to play with your alliens', location: 'Moon'},
+  { title: 'venus soccer', description: 'Kicking the ball', location: 'Mercury'}]
+
+meet_ups.each do |attributes|
+  Meetup.create(attributes)
+end
