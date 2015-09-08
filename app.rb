@@ -33,13 +33,22 @@ end
 
 get '/' do
   @title = 'Meet ups in Space'
-  @meet_ups = Meetup.all
+  @meet_ups = Meetup.all.order(:title)
   erb :index
 end
 
 get '/:id' do
-
+  @meet_up = Meetup.all.find_by id: params['id']
   erb :show
+end
+
+post '/' do
+  var = Meetup.create(
+    title: params[:title],
+    description: params[:description],
+    location: params[:location]
+    )
+  redirect "/#{var.id}"
 end
 
 get '/auth/github/callback' do
@@ -61,4 +70,22 @@ end
 
 get '/example_protected_page' do
   authenticate!
+end
+
+
+get '/:id/update' do
+  @meet_up = Meetup.all.find_by id: params['id']
+  erb :update
+end
+
+
+patch "/:id/update" do
+ new_title = params["title"]
+ new_description = params["description"]
+ new_location = params["location"]
+
+ @meet_up = Meetup.all.find_by id: params['id']
+ @meet_up.update_attribute(title: new_title, description: new_description, location: new_location)
+
+  redirect "/"
 end

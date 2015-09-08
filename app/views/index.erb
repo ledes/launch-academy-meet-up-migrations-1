@@ -8,9 +8,36 @@
   </tr>
   <tr>
     <%@meet_ups.each do |meet_up|%>
-    <td><%=meet_up.title%></td>
+
+    <td><a href="/<%=meet_up.id%>"><%=meet_up.title%></a></td>
     <td><%=meet_up.description%></td>
     <td><%=meet_up.location%></td>
+    <td>
+      <li><form action="/<%= meet_up.id%>/update" method='post'>
+        <input type="hidden" name="_method" value="delete">
+        <input type='submit' class='button' name="button" value='delete'>
+      </form>
+    </td>
+    <td>
+        <form method="get" action="/<%= meet_up.id %>/update">
+          <button class='button' type="submit">UPDATE</button>
+       </form></li>
+    </td>
   </tr>
   <%end%>
 </table>
+<div>
+  <h3>Add a new Meet Up</h3>
+  <form action="/" method="post">
+    <label for="title"> Title </label>
+    <input type="text" class='button'name="title">
+
+    <label for="description">Description </label>
+    <input type="text" class='button' name="description">
+
+    <label for="location"> Location </label>
+    <input type="text" class='button' name="location">
+
+    <input type="submit" class='button'value="Submit New Meet Up">
+  </form>
+</div>
