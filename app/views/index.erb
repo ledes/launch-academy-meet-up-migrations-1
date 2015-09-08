@@ -7,21 +7,21 @@
     <td>Place</td>
   </tr>
   <tr>
-    <%@meet_ups.each do |meet_up|%>
+    <%meet_ups.each do |meet_up|%>
 
     <td><a href="/<%=meet_up.id%>"><%=meet_up.title%></a></td>
     <td><%=meet_up.description%></td>
     <td><%=meet_up.location%></td>
     <td>
-      <li><form action="/<%= meet_up.id%>/update" method='post'>
+      <form action="/<%= meet_up.id%>" method='post'>
         <input type="hidden" name="_method" value="delete">
         <input type='submit' class='button' name="button" value='delete'>
       </form>
     </td>
     <td>
-        <form method="get" action="/<%= meet_up.id %>/update">
-          <button class='button' type="submit">UPDATE</button>
-       </form></li>
+      <form  action="/<%= meet_up.id %>/update">
+        <input class='button' type="submit" value="Update">
+      </form>
     </td>
   </tr>
   <%end%>

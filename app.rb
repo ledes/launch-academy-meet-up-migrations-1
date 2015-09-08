@@ -33,13 +33,13 @@ end
 
 get '/' do
   @title = 'Meet ups in Space'
-  @meet_ups = Meetup.all.order(:title)
-  erb :index
+  meet_ups = Meetup.all.order(:title)
+  erb :index, locals: {meet_ups: meet_ups}
 end
 
 get '/:id' do
-  @meet_up = Meetup.all.find_by id: params['id']
-  erb :show
+  meet_up = Meetup.find_by id: params['id']
+  erb :show, locals: {meet_up: meet_up}
 end
 
 post '/' do
@@ -72,20 +72,27 @@ get '/example_protected_page' do
   authenticate!
 end
 
+## delete  meet_ups
+delete "/:id" do
+ id = params['id']
+ meet_up = Meetup.find_by id: params['id']
+ Meetup.destroy(meet_up)
+ redirect "/"
+end
 
+## update  meet_ups
 get '/:id/update' do
-  @meet_up = Meetup.all.find_by id: params['id']
-  erb :update
+  meet_up = Meetup.find_by id: params['id']
+  erb :update, locals: {meet_up: meet_up}
 end
 
 
-patch "/:id/update" do
- new_title = params["title"]
- new_description = params["description"]
- new_location = params["location"]
+patch "/:id" do
+  meet_up = Meetup.all.find_by id: params['id']
 
- @meet_up = Meetup.all.find_by id: params['id']
- @meet_up.update_attribute(title: new_title, description: new_description, location: new_location)
+  meet_up.update_attribute(:title, params["title"])
+  meet_up.update_attribute(:description, params["description"])
+  meet_up.update_attribute(:location, params["location"])
 
   redirect "/"
 end
