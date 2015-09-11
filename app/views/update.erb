@@ -1,14 +1,15 @@
 <h3>Update <%=meet_up.title%></h3>
 <form action="/<%=meet_up.id%>" method="post">
   <input type="hidden" name="_method" value="PATCH">
+
   <label for="title"> Title </label>
-  <input type="text" class='button'name="title">
+  <input type="text" class='button'value="<%=meet_up.title%>" name="title">
 
   <label for="description">Description </label>
-  <input type="text" class='button' name="description">
+  <input type="text" class='button' value="<%=meet_up.description%>" name="description">
 
   <label for="location"> Location </label>
-  <input type="text" class='button' name="location">
+  <input type="text" class='button' value="<%=meet_up.location%>" name="location">
 
   <input type="submit" class='button'value="Update Meet Up">
 </form>
